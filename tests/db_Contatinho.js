@@ -39,7 +39,7 @@ describe('Test Contatinho Model', function() {
         Contatinho.findById(contatinho.id).then(result => {
             result.should.be.Object();
             result.id.should.be.equal(contatinho.id);
-            result.siape.should.be.equal(contatinho.siape);
+            result.nome.should.be.equal(contatinho.nome);
             done();
         });
     });
