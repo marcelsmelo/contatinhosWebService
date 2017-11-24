@@ -10,14 +10,7 @@ module.exports = {
 
     },
     getContatinhoByID: (req, res, next) => {
-        Contatinho.findById(req.param.id).then(contatinho => {
-            res.status(200).json(contatinho);
-        }).catch(error => {
-            res.status(500).json(null);
-        });
-    },
-    getContatinhoByName: (req, res, next) => {
-        Contatinho.findById(req.param.nome).then(contatinho => {
+        Contatinho.findById(req.params.id).then(contatinho => {
             res.status(200).json(contatinho);
         }).catch(error => {
             res.status(500).json(null);
@@ -31,15 +24,26 @@ module.exports = {
             res.status(500).json(null);
         });
     },
+    updateContatinho: (req, res, next) => {
+        const contact = req.body;
+        console.log('BODY', req.body);
+
+        Contatinho.update(contact, { where: { id: req.body.id } })
+            .then(contatinho => {
+                res.status(200).json(null);
+            }).catch(error => {
+                res.status(500).json(null);
+            });
+    },
     deleteContatinhoById: (req, res, next) => {
         Contatinho.destroy({
             where: {
-                id: req.param.id
+                id: req.params.id
             }
         }).then((rows) => { //Número de linhas afetadas
-            res.status(200).json(contatinho);
+            res.status(200).json(null);
         }).catch(error => {
             res.status(500).json(null);
         });
     },
-}
+};

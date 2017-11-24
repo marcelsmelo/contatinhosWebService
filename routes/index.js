@@ -3,8 +3,8 @@ module.exports = (app) => {
 
     /* GET home page. */
     app.get('/contatinhos', controller.getContatinhos);
-    app.post('/contatinhos/:id', controller.getContatinhoByID);
-    app.get('/contatinhos/:nome', controller.getContatinhoByName);
+    app.get('/contatinhos/:id', controller.getContatinhoByID);
     app.post('/contatinhos', controller.createContatinho);
-    //app.get('/carros/classicos', controller.classicos);
+    app.put('/contatinhos', controller.updateContatinho);
+    app.delete('/contatinhos/:id', controller.deleteContatinhoById);
 }
