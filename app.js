@@ -47,9 +47,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 let swaggerDefinition = {
     openapi: '3.0.1',
     info: {
-      title: 'API aplicativo anúncios', //Nome da API
+      title: 'API de Contatinhos', //Nome da API
       version: '1.0.0', //Versão da API
-      description: 'API de manipulação de anúncios para as disciplinas do TSI',
+      description: 'API de manipulação de contatinhos',
     },
     //host: 'anuncios.marcelmelo.com.br', //URL base da API
     basePath: '/',

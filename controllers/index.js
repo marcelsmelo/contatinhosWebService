@@ -8,7 +8,7 @@ module.exports = {
         }).then(usuarios => {
             res.status(200).json(usuarios);
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao buscar usuários!", error: error.errors[0].message});
+            res.status(500).json({ msg: "Erro ao buscar usuários!", error: error});
         });
 
     },
@@ -22,20 +22,24 @@ module.exports = {
        }).then(usuario => {
             res.status(200).json(usuario);
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao recuperar usuário!", error: error.errors[0].message  });
+            res.status(500).json({ msg: "Erro ao recuperar usuário!", error: error });
         });
     },
     createUsuario: (req, res, next) => {
+      console.log(req.body)
+
         const user = {
             nome: req.body.nome,
-            email: req.body.email,
+            email: req.body.email, 
             senha: req.body.senha
         };
+
+        console.log(user)
 
         Usuario.create(user).then(usuario => {
             res.status(201).json({ msg: "Usuário criado com sucesso" });
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao cadastrar usuário!", error: error.errors[0].message  });
+            res.status(500).json({ msg: "Erro ao cadastrar usuário!", error: error});
         });
     },
     updateUsuario: (req, res, next) => {
@@ -50,11 +54,11 @@ module.exports = {
             res.status(200).json({ msg: "Usuário editado com sucesso" });
           })
           .catch(error =>{
-            res.status(500).json({ msg: "Erro ao editar usuário!", error: error.errors[0].message  });
+            res.status(500).json({ msg: "Erro ao editar usuário!", error: error });
           })
         })
         .catch(error => {
-            res.status(500).json({ msg: "Erro ao editar usuário!", error: error.errors[0].message});
+            res.status(500).json({ msg: "Erro ao editar usuário!", error: error});
         });
     },
     deleteUsuarioById: (req, res, next) => {
@@ -66,7 +70,7 @@ module.exports = {
         }).then((rows) => { //Número de linhas afetadas
             res.status(200).json({ msg: "Usuário removido com sucesso" });
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao remover usuário!", error: error.errors[0].message  });
+            res.status(500).json({ msg: "Erro ao remover usuário!", error: error});
         });
     },
 
@@ -129,7 +133,7 @@ module.exports = {
           } catch (error) {
             res
               .status(500)
-              .send({ msg: "Logout não realizado!", error: error.errors[0].message });
+              .send({ msg: "Logout não realizado!", error: error});
           } 
     },
     //Retorna os dados do usuário logado
@@ -146,7 +150,7 @@ module.exports = {
     } catch (error) {
       return res
         .status(500)
-        .json({ msg: "Erro ao buscar informações", error: error.errors[0].message });
+        .json({ msg: "Erro ao buscar informações", error: error});
     }
   },
 };
