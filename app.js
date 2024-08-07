@@ -3,8 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
-
 //Documentação Swagger
 //Importar Swagger-ui-Express e SwaggerJSDoc
 const swaggerUi = require('swagger-ui-express');

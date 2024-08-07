@@ -6,9 +6,9 @@ module.exports = {
           raw: true,
           attributes: ["id", "nome", "email"]
         }).then(usuarios => {
-            res.status(200).json(usuarios);
+            return res.status(200).json(usuarios);
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao buscar usuários!", error: error});
+            return res.status(500).json({ msg: "Erro ao buscar usuários!", error: error});
         });
 
     },
@@ -20,9 +20,9 @@ module.exports = {
           raw: true,
           attributes: ["id", "nome", "email"]
        }).then(usuario => {
-            res.status(200).json(usuario);
+          return res.status(200).json(usuario);
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao recuperar usuário!", error: error });
+          return res.status(500).json({ msg: "Erro ao recuperar usuário!", error: error });
         });
     },
     createUsuario: (req, res, next) => {
@@ -37,9 +37,9 @@ module.exports = {
         console.log(user)
 
         Usuario.create(user).then(usuario => {
-            res.status(201).json({ msg: "Usuário criado com sucesso" });
+          return res.status(201).json({ msg: "Usuário criado com sucesso" });
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao cadastrar usuário!", error: error});
+          return res.status(500).json({ msg: "Erro ao cadastrar usuário!", error: error});
         });
     },
     updateUsuario: (req, res, next) => {
@@ -51,14 +51,14 @@ module.exports = {
 
         Usuario.findOne({where: {id: req.user.id}}).then( (usuario)=> {
           usuario.update(editedData).then(editedUser =>{
-            res.status(200).json({ msg: "Usuário editado com sucesso" });
+            return res.status(200).json({ msg: "Usuário editado com sucesso" });
           })
           .catch(error =>{
-            res.status(500).json({ msg: "Erro ao editar usuário!", error: error });
+            return res.status(500).json({ msg: "Erro ao editar usuário!", error: error });
           })
         })
         .catch(error => {
-            res.status(500).json({ msg: "Erro ao editar usuário!", error: error});
+          return res.status(500).json({ msg: "Erro ao editar usuário!", error: error});
         });
     },
     deleteUsuarioById: (req, res, next) => {
@@ -68,9 +68,9 @@ module.exports = {
                 id: req.user.id
             }
         }).then((rows) => { //Número de linhas afetadas
-            res.status(200).json({ msg: "Usuário removido com sucesso" });
+          return res.status(200).json({ msg: "Usuário removido com sucesso" });
         }).catch(error => {
-            res.status(500).json({ msg: "Erro ao remover usuário!", error: error});
+          return res.status(500).json({ msg: "Erro ao remover usuário!", error: error});
         });
     },
 
@@ -96,21 +96,21 @@ module.exports = {
                     })
                     .catch((error) => {
                       //Erro ao gerar o Token JWT
-                      res.status(500).json({
+                      return res.status(500).json({
                         msg: "Erro ao realizar o login!",
-                        error: error.errors[0].message,
+                        error: error,
                       });
                     });
                 } else {
                   //Senha informada está incorreta
-                  res.status(500).json({
+                  return res.status(500).json({
                     msg: "Senha informada está incorreta!",
                     error: null,
                   });
                 }
               }
           }).catch((error) => {
-            res.status(500).json({
+            return res.status(500).json({
             msg: "Usuário não encontrado!",
             error: null,
         });
@@ -129,9 +129,9 @@ module.exports = {
                 },
               }
             );
-            res.status(200).send({ msg: "Logout realizado com sucesso!" });
+            return res.status(200).send({ msg: "Logout realizado com sucesso!" });
           } catch (error) {
-            res
+            return res
               .status(500)
               .send({ msg: "Logout não realizado!", error: error});
           } 
