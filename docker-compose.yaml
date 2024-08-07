@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  app:
+    build: .
+    #entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    ports:
+      - 80:3000
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    #command: bash -c "chmod +x ./wait-for-it.sh && ./wait-for-it.sh -t 0 db:3306 -- node ./database/syncDB.js && npm start"
+    command: npm start
+    volumes:
+      - ./:/home/node/app
+      - node_modules:/home/node/app/node_modules
+# Names our volume
+volumes:
+  node_modules: 

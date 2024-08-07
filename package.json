@@ -2,29 +2,39 @@
     "name": "contatinhos",
     "version": "0.0.0",
     "private": true,
+    "quokka": {
+        "babel": true
+    },
     "scripts": {
-        "start": "node ./bin/www",
+        "start": "nodemon -L ./bin/www",
         "test": "mocha tests --recursive --watch"
     },
     "dependencies": {
-        "body-parser": "~1.13.2",
-        "cheerio": "^0.20.0",
-        "cookie-parser": "~1.3.5",
-        "cors": "^2.8.1",
-        "debug": "~2.2.0",
-        "express": "~4.13.1",
+        "axios": "^1.6.2",
+        "body-parser": "^1.19.0",
+        "cheerio": "^1.0.0-rc.12",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "debug": "^4.1.1",
+        "dotenv-safe": "^8.2.0",
+        "express": "^4.17.1",
         "express-load": "1.1.16",
-        "mongoose": "^4.4.12",
-        "morgan": "~1.6.1",
-        "pg": "7.4.0",
-        "request": "^2.72.0",
-        "sequelize": "4.22.15",
-        "serve-favicon": "~2.3.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^5.9.7",
+        "morgan": "^1.10.0",
+        "mysql2": "^3.11.0",
+        "nodemailer": "^6.4.6",
+        "sequelize": "^6.35.1",
+        "serve-favicon": "^2.5.0",
+        "swagger-jsdoc": "^4.0.0",
+        "swagger-ui-express": "^4.1.4",
         "winston": "^2.2.0"
     },
     "devDependencies": {
+        "babel-core": "^6.26.3",
         "chai": "4.1.2",
-        "mocha": "4.0.1",
+        "mocha": "^10.2.0",
+        "nodemon": "^3.0.1",
         "should": "13.1.3"
     }
 }

@@ -1,2 +1,2 @@
-# Contatinhos WebService
-Salve seus contatinhos com sucesso
+# UsuariosWB
+Webservice REST para dados de usuários

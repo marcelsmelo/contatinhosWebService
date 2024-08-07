@@ -1,3 +1,3 @@
-const Contatinho = require('./model/Contatinho.js');
+const Usuario = require('./model/Usuario.js');
 
-Contatinho.sync();
+Usuario.sync();

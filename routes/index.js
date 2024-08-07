@@ -1,10 +1,15 @@
 module.exports = (app) => {
     const controller = require('../controllers/index.js');
+    const auth = require('../lib/auth')
 
     /* GET home page. */
-    app.get('/contatinhos', controller.getContatinhos);
-    app.get('/contatinhos/:id', controller.getContatinhoByID);
-    app.post('/contatinhos', controller.createContatinho);
-    app.put('/contatinhos', controller.updateContatinho);
-    app.delete('/contatinhos/:id', controller.deleteContatinhoById);
+    app.get('/usuario', auth.jwtVerify, controller.meusDados);
+    //app.get('/usuarios/', controller.getUsuarioByID);
+    app.post('/usuario', controller.createUsuario);
+    app.put('/usuario', auth.jwtVerify, controller.updateUsuario);
+    app.delete('/usuario/', auth.jwtVerify, controller.deleteUsuarioById);
+    
+    app.post('/login', controller.login);//ok
+    app.post('/logout', auth.jwtVerify, controller.logout);//ok
+    app.get('/me', auth.jwtVerify, controller.meusDados); 
 }

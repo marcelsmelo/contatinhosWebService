@@ -1,11 +1,20 @@
 const express = require('express');
 const path = require('path');
-//const favicon = require('serve-favicon');
-//const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+
+
+//Documentação Swagger
+//Importar Swagger-ui-Express e SwaggerJSDoc
+const swaggerUi = require('swagger-ui-express');
+let swaggerJSDoc = require('swagger-jsdoc');
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
+app.use(cors());
 
 global.logger = require('winston');
 logger.remove(logger.transports.Console)
@@ -18,8 +27,7 @@ logger.level = 'debug';
 
 const load = require('express-load');
 
-const cors = require('cors');
-app.use(cors());
+
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
@@ -30,9 +38,43 @@ app.use(cors());
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(path.join(__dirname, 'public')));
+//================= Docs Swagger =========================
+//==========================================================
+
+// swagger definition
+let swaggerDefinition = {
+    openapi: '3.0.1',
+    info: {
+      title: 'API aplicativo anúncios', //Nome da API
+      version: '1.0.0', //Versão da API
+      description: 'API de manipulação de anúncios para as disciplinas do TSI',
+    },
+    //host: 'anuncios.marcelmelo.com.br', //URL base da API
+    basePath: '/',
+    components: {
+        securitySchemes:{
+            "BearerAuth": { "type": "http", "scheme": "bearer" }
+        }
+    }
+    
+  };
+  
+  // options for the swagger docs
+  let options = {
+    // import swaggerDefinitions, definido anteriormente
+    swaggerDefinition: swaggerDefinition,
+    // arquivos que contem especificações para geração da documentação
+    apis: ['./documentacao/modelsDoc.js', './documentacao/lib.js', './documentacao/*.js'],
+    
+  };
+  
+  // initialize swagger-jsdoc
+  let swaggerSpec = swaggerJSDoc(options);
+
+  //Rota para acessar a documentação
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 /**********************

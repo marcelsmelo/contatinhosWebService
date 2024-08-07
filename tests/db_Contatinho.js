@@ -1,5 +1,5 @@
 const should = require('should');
-const Contatinho = require('../model/Contatinho.js');
+const Contatinho = require('../model/Usuario.js');
 
 describe('Test Contatinho Model', function() {
     var contatinho = {};
